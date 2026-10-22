@@ -1,24 +1,5 @@
-/* ===================================================================
-   To-Do List Life Dashboard — script.js
-   Step 3: Greeting section
-     - Real-time clock (time + date, updates every second)
-     - Time-of-day greeting (Good Morning / Afternoon / Evening / Night)
-     - Challenge 2: editable custom name, persisted via localStorage
-   Step 4: Focus Timer
-     - 25-minute countdown with Start / Stop / Reset
-     - Drift-free timing using a wall-clock end timestamp
-   Step 5: To-Do List
-     - Add / edit (double-click) / toggle-done / delete tasks
-     - All tasks persisted to localStorage (TC-2)
-     - Challenge 3: block exact duplicate tasks with an inline error
-   Step 6: Quick Links
-     - Add links (name + URL) that open in a new tab; delete links
-     - All links persisted to localStorage; defaults seeded on first run
-   =================================================================== */
-
 (function () {
   "use strict";
-
   document.addEventListener("DOMContentLoaded", function () {
     initGreeting();
     initFocusTimer();
@@ -27,9 +8,6 @@
     // Note: Light/Dark mode toggle (Challenge 1) is not yet wired up.
   });
 
-  /* -----------------------------------------------------------------
-     Greeting section
-     ----------------------------------------------------------------- */
   function initGreeting() {
     var greetingHeading = document.getElementById("greeting-heading");
     var timeEl = document.getElementById("current-time");
@@ -38,10 +16,7 @@
 
     var STORAGE_KEY = "dashboard.userName";
     var DEFAULT_NAME = "Friend";
-
-    // Build the editable greeting inside the existing <h2>:
-    //   "Good Morning, Friend!" — the word updates with the clock,
-    //   the name span is contenteditable and persisted to localStorage.
+     
     greetingHeading.innerHTML =
       '<span id="greeting-word">Hello</span>, <span id="user-name" ' +
       'class="user-name" contenteditable="true" spellcheck="false" ' +
@@ -50,19 +25,15 @@
     var wordEl = document.getElementById("greeting-word");
     var nameEl = document.getElementById("user-name");
 
-    // Inline affordance styles so this step is self-contained in script.js.
     injectNameStyles();
 
-    // Restore the saved name (Challenge 2)
     var savedName = localStorage.getItem(STORAGE_KEY);
     if (savedName) {
       nameEl.textContent = savedName;
     }
-
-    // --- Real-time clock + greeting ---
+     
     updateClock();
     setInterval(updateClock, 1000);
-
     function updateClock() {
       var now = new Date();
       timeEl.textContent = formatTime(now);
@@ -70,9 +41,6 @@
       wordEl.textContent = getGreetingWord(now);
     }
 
-    // --- Editable name handlers (Challenge 2) ---
-
-    // Select all text on focus so typing replaces the name easily.
     nameEl.addEventListener("focus", function () {
       var range = document.createRange();
       range.selectNodeContents(nameEl);
@@ -81,7 +49,6 @@
       selection.addRange(range);
     });
 
-    // Pressing Enter commits the edit (prevents line breaks).
     nameEl.addEventListener("keydown", function (e) {
       if (e.key === "Enter") {
         e.preventDefault();
@@ -89,24 +56,18 @@
       }
     });
 
-    // Persist on blur; fall back to the default if left empty.
     nameEl.addEventListener("blur", function () {
       var value = nameEl.textContent.replace(/\s+/g, " ").trim();
       if (!value) {
         nameEl.textContent = DEFAULT_NAME;
         localStorage.removeItem(STORAGE_KEY);
       } else {
-        nameEl.textContent = value; // normalize + strips any pasted HTML
+        nameEl.textContent = value; 
         localStorage.setItem(STORAGE_KEY, value);
       }
     });
   }
 
-  /* -----------------------------------------------------------------
-     Helpers
-     ----------------------------------------------------------------- */
-
-  // 12-hour clock with seconds, e.g. "10:05:09 PM"
   function formatTime(now) {
     var h = now.getHours();
     var m = now.getMinutes();
@@ -119,7 +80,6 @@
     return h + ":" + pad(m) + ":" + pad(s) + " " + ampm;
   }
 
-  // Long form date using the visitor's locale, e.g. "Thursday, October 22, 2026"
   function formatDate(now) {
     return now.toLocaleDateString(undefined, {
       weekday: "long",
@@ -129,7 +89,6 @@
     });
   }
 
-  // Pick a greeting based on the hour of day
   function getGreetingWord(now) {
     var h = now.getHours();
     if (h < 12) return "Good Morning";
@@ -138,8 +97,6 @@
     return "Good Night";
   }
 
-  // Dashed-underline affordance so the name looks clickable/editable.
-  // White tones are used because the greeting card always has white text.
   function injectNameStyles() {
     var style = document.createElement("style");
     style.textContent = [
@@ -154,9 +111,6 @@
     document.head.appendChild(style);
   }
 
-  /* -----------------------------------------------------------------
-     Focus Timer section
-     ----------------------------------------------------------------- */
   function initFocusTimer() {
     var displayEl = document.getElementById("timer-display");
     var startBtn = document.getElementById("timer-start");
@@ -165,23 +119,23 @@
     var statusEl = document.getElementById("timer-status");
     if (!displayEl || !startBtn || !stopBtn || !resetBtn || !statusEl) return;
 
-    var DURATION = 25 * 60; // 25 minutes, in seconds
+    var DURATION = 25 * 60; 
     var remaining = DURATION;
     var intervalId = null;
-    var endTime = null; // wall-clock time at which the timer hits zero
+    var endTime = null;
 
     startBtn.addEventListener("click", startTimer);
     stopBtn.addEventListener("click", stopTimer);
     resetBtn.addEventListener("click", resetTimer);
 
-    updateDisplay(); // show 25:00 right away
+    updateDisplay(); 
 
     function startTimer() {
-      if (intervalId !== null) return; // already running
-      if (remaining <= 0) remaining = DURATION; // restart after finishing
+      if (intervalId !== null) return; 
+      if (remaining <= 0) remaining = DURATION; 
       endTime = Date.now() + remaining * 1000;
       intervalId = setInterval(tick, 1000);
-      tick(); // paint immediately instead of waiting a second
+      tick(); 
       setStatus("Focusing…");
     }
 
@@ -196,10 +150,9 @@
     }
 
     function stopTimer() {
-      if (intervalId === null) return; // nothing running to stop
+      if (intervalId === null) return; 
       clearInterval(intervalId);
       intervalId = null;
-      // freeze the exact remaining time at the moment we stopped
       remaining = Math.max(0, Math.round((endTime - Date.now()) / 1000));
       updateDisplay();
       setStatus("Paused");
@@ -230,9 +183,6 @@
     }
   }
 
-  /* -----------------------------------------------------------------
-     To-Do List section
-     ----------------------------------------------------------------- */
   function initTodoList() {
     var form = document.getElementById("todo-form");
     var input = document.getElementById("todo-input");
@@ -244,7 +194,6 @@
     var tasks = loadTasks();
     var errorTimer = null;
 
-    // Inline error message (Challenge 3) + its affordance styles.
     injectTodoStyles();
     var errorEl = document.createElement("p");
     errorEl.id = "todo-error";
@@ -261,8 +210,6 @@
     });
 
     renderTasks();
-
-    // --- Mutations ---
 
     function addTask(text) {
       var value = normalize(text);
@@ -315,10 +262,10 @@
       function onKey(e) {
         if (e.key === "Enter") {
           e.preventDefault();
-          span.blur(); // commit via onBlur
+          span.blur();
         } else if (e.key === "Escape") {
           e.preventDefault();
-          finish(original); // discard changes
+          finish(original); 
         }
       }
 
@@ -344,9 +291,6 @@
       }
     }
 
-    // --- Rendering ---
-    // Built with the DOM API (not innerHTML) so task text can never
-    // inject HTML — only plain text is ever inserted.
     function renderTasks() {
       ulEl.innerHTML = "";
       tasks.forEach(function (task) {
@@ -388,8 +332,6 @@
       emptyEl.hidden = tasks.length > 0;
     }
 
-    // --- Persistence (TC-2) ---
-
     function saveTasks() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
     }
@@ -405,8 +347,6 @@
       }
     }
 
-    // --- Helpers ---
-
     function findTask(id) {
       for (var i = 0; i < tasks.length; i++) {
         if (tasks[i].id === id) return tasks[i];
@@ -414,8 +354,6 @@
       return null;
     }
 
-    // Exact (case-sensitive) duplicate check on trimmed text.
-    // excludeId lets editing a task ignore itself.
     function isDuplicate(value, excludeId) {
       return tasks.some(function (t) {
         return t.id !== excludeId && t.text === value;
@@ -466,10 +404,6 @@
       document.head.appendChild(style);
     }
   }
-
-  /* -----------------------------------------------------------------
-     Quick Links section
-     ----------------------------------------------------------------- */
   function initQuickLinks() {
     var form = document.getElementById("link-form");
     var nameInput = document.getElementById("link-name");
@@ -482,15 +416,12 @@
     var links = loadLinks();
     var errorTimer = null;
 
-    // Inline error message (invalid name/URL, bad scheme, etc.)
     var errorEl = document.createElement("p");
     errorEl.id = "link-error";
     errorEl.className = "link-error";
     errorEl.setAttribute("role", "alert");
     form.parentNode.insertBefore(errorEl, form.nextSibling);
 
-    // Persist right away so the seeded defaults survive a reload
-    // even before the user makes their first change.
     saveLinks();
 
     form.addEventListener("submit", function (e) {
@@ -503,8 +434,6 @@
     });
 
     renderLinks();
-
-    // --- Mutations ---
 
     function addLink(name, url) {
       name = (name || "").trim();
@@ -531,10 +460,6 @@
       renderLinks();
     }
 
-    // --- Rendering ---
-    // Each link is a real <a target="_blank"> styled as a button, so
-    // native new-tab behaviour, middle-click and right-click all work.
-    // Built with the DOM API so link names can never inject HTML.
     function renderLinks() {
       listEl.innerHTML = "";
       links.forEach(function (link) {
@@ -565,14 +490,11 @@
 
       emptyEl.hidden = links.length > 0;
     }
-
-    // --- Persistence ---
-
+     
     function saveLinks() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(links));
       } catch (e) {
-        /* ignore quota / private-mode errors */
       }
     }
 
@@ -584,7 +506,7 @@
         return defaultLinks();
       }
       if (raw === null) {
-        return defaultLinks(); // first visit -> sensible defaults
+        return defaultLinks();
       }
       try {
         var parsed = JSON.parse(raw);
@@ -593,9 +515,7 @@
         return [];
       }
     }
-
-    // --- Helpers ---
-
+     
     function defaultLinks() {
       return [
         { id: makeLinkId(), name: "Google", url: "https://www.google.com" },
@@ -607,8 +527,6 @@
       ];
     }
 
-    // Bare domains like "google.com" get "https://" prepended.
-    // Non-http(s) schemes (e.g. javascript:) are rejected for safety.
     function normalizeUrl(url) {
       url = (url || "").trim();
       if (!url) return "";
