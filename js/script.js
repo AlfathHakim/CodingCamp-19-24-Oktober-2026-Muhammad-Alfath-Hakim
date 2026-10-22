@@ -5,7 +5,6 @@
     initFocusTimer();
     initTodoList();
     initQuickLinks();
-    // Note: Light/Dark mode toggle (Challenge 1) is not yet wired up.
   });
 
   function initGreeting() {
