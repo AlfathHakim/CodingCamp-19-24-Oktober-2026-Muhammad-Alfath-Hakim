@@ -36,7 +36,7 @@ tools. Cukup buka `index.html` di browser.
 ## Tantangan (Challenges)
 | Challenge | Status |
 |-----------|--------|
-| Challenge 1 — Light/Dark mode | ⚠️ UI & CSS siap, tapi logika toggle JS belum dihubungkan (lihat Known Limitations).
+| Challenge 1 — Light/Dark mode | ✅ Selesai (toggle berfungsi, ikon menyesuaikan 🌙/☀️, dan persist via `localStorage`). |
 | Challenge 2 — Nama kustom di sapaan | ✅ Selesai (persist via `localStorage`). |
 | Challenge 3 — Cegah tugas duplikat | ✅ Selesai (cek exact match + pesan error). |
 | TC-2 — Semua tugas tersimpan | ✅ Selesai (`localStorage`). |
@@ -80,7 +80,6 @@ Untuk mereset data: buka DevTools → tab **Application** → **Local Storage** 
 - Timer & jam pakai `setInterval`; akurasi sangat baik untuk pemakaian normal tetapi tidak presisi sub-detik.
 
 ## Roadmap / Ide Pengembangan
-- Hubungkan logika Light/Dark mode (Challenge 1).
 - Notifikasi/suara saat timer selesai.
 - Filter to-do (semua / belum selesai / selesai) + hitungan tugas.
 - Ekspor/impor data to-do & quick links (backup).

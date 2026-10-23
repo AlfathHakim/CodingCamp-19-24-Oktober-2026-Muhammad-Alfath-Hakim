@@ -6,6 +6,7 @@
     initFocusTimer();
     initTodoList();
     initQuickLinks();
+    initThemeToggle();
   });
 
   function initGreeting() {
@@ -556,5 +557,31 @@
         errorEl.classList.remove("show");
       }, 3000);
     }
+  }
+  function initThemeToggle() {
+    var themeToggleBtn = document.getElementById("theme-toggle");
+    var icon = themeToggleBtn.querySelector(".theme-toggle-icon");
+    if (!themeToggleBtn) return;
+
+    var savedTheme = localStorage.getItem("dashboard.theme");
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-mode");
+      icon.textContent = "☀️";
+      themeToggleBtn.setAttribute("aria-pressed", "true");
+    }
+
+    themeToggleBtn.addEventListener("click", function () {
+      var isDark = document.body.classList.toggle("dark-mode");
+      
+      if (isDark) {
+        localStorage.setItem("dashboard.theme", "dark");
+        icon.textContent = "☀️";
+        themeToggleBtn.setAttribute("aria-pressed", "true");
+      } else {
+        localStorage.setItem("dashboard.theme", "light");
+        icon.textContent = "🌙";
+        themeToggleBtn.setAttribute("aria-pressed", "false");
+      }
+    });
   }
 })();
