@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- Page header with title and Light/Dark mode toggle -->
   <header class="site-header">
     <div class="header-inner">
       <h1 class="site-title">My Life Dashboard</h1>
@@ -20,14 +19,12 @@
 
   <main class="dashboard">
 
-    <!-- Greeting section: shows the time, date, and a dynamic greeting -->
     <section id="greeting" class="card greeting" aria-labelledby="greeting-heading">
       <h2 id="greeting-heading" class="greeting-text">Hello!</h2>
       <p class="greeting-time" id="current-time">--:--</p>
       <p class="greeting-date" id="current-date">Loading date…</p>
     </section>
 
-    <!-- Focus Timer: a 25-minute Pomodoro-style timer -->
     <section id="focus-timer" class="card focus-timer" aria-labelledby="timer-heading">
       <h2 id="timer-heading" class="section-title">Focus Timer</h2>
       <p class="timer-display" id="timer-display" aria-live="polite">25:00</p>
@@ -39,7 +36,6 @@
       <p class="timer-status" id="timer-status">Ready to focus</p>
     </section>
 
-    <!-- To-Do List: add tasks and mark them complete -->
     <section id="todo-list" class="card todo-list" aria-labelledby="todo-heading">
       <h2 id="todo-heading" class="section-title">To-Do List</h2>
       <form id="todo-form" class="todo-form">
@@ -49,12 +45,10 @@
         <button id="todo-add" class="btn btn-primary" type="submit">Add</button>
       </form>
       <ul id="todo-items" class="todo-items" aria-live="polite">
-        <!-- Tasks are injected by JavaScript -->
       </ul>
       <p class="todo-empty" id="todo-empty">No tasks yet — add one above!</p>
     </section>
 
-    <!-- Quick Links: shortcuts to frequently visited sites -->
     <section id="quick-links" class="card quick-links" aria-labelledby="links-heading">
       <h2 id="links-heading" class="section-title">Quick Links</h2>
       <form id="link-form" class="link-form">
@@ -67,7 +61,6 @@
         <button id="link-add" class="btn btn-primary" type="submit">Add Link</button>
       </form>
       <ul id="links-list" class="links-list">
-        <!-- Links are injected by JavaScript -->
       </ul>
       <p class="links-empty" id="links-empty">No quick links yet — add one above!</p>
     </section>

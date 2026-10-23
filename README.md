@@ -36,7 +36,7 @@ tools. Cukup buka `index.html` di browser.
 ## Tantangan (Challenges)
 | Challenge | Status |
 |-----------|--------|
-| Challenge 1 — Light/Dark mode | ⚠️ UI & CSS siap, tapi **logika toggle JS belum dihubungkan** (lihat *Known Limitations*). |
+| Challenge 1 — Light/Dark mode | ⚠️ UI & CSS siap, tapi logika toggle JS belum dihubungkan (lihat Known Limitations).
 | Challenge 2 — Nama kustom di sapaan | ✅ Selesai (persist via `localStorage`). |
 | Challenge 3 — Cegah tugas duplikat | ✅ Selesai (cek exact match + pesan error). |
 | TC-2 — Semua tugas tersimpan | ✅ Selesai (`localStorage`). |
@@ -71,11 +71,12 @@ Disarankan browser modern (Chrome, Edge, Firefox, Safari versi terbaru).
 | `dashboard.userName` | Nama kustom di sapaan (Challenge 2) |
 | `dashboard.tasks` | Array tugas: `[{ id, text, done }]` |
 | `dashboard.quickLinks` | Array link: `[{ id, name, url }]` |
+| `dashboard.theme` | Tema terpilih: `"light"` / `"dark"` (Challenge 1) |
 
 Untuk mereset data: buka DevTools → tab **Application** → **Local Storage** → hapus key di atas, lalu reload.
 
 ## Known Limitations
-- **Challenge 1 (Light/Dark mode):** tombol toggle, class CSS `.dark-mode`, dan variabel tema sudah ada, namun **JavaScript untuk men-toggle class tersebut belum dibuat**, jadi tombol belum berfungsi. Pekerjaan tersisa: toggle class `.dark-mode` di `<body>`, simpan preferensi ke `localStorage`, dan tukar ikon 🌙/☀️.
+- Challenge 1 (Light/Dark mode): tombol toggle, class CSS .dark-mode, dan variabel tema sudah ada, namun JavaScript untuk men-toggle class tersebut belum dibuat, jadi tombol belum berfungsi. Pekerjaan tersisa: toggle class .dark-mode di <body>, simpan preferensi ke localStorage, dan tukar ikon 🌙/☀️.
 - Timer & jam pakai `setInterval`; akurasi sangat baik untuk pemakaian normal tetapi tidak presisi sub-detik.
 
 ## Roadmap / Ide Pengembangan

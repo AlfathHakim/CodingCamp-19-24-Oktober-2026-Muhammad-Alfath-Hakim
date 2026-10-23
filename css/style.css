@@ -1,45 +1,25 @@
-/* ===================================================================
-   To-Do List Life Dashboard — style.css
-   Single-file stylesheet. Clean, minimal, user-friendly.
-   Theming is driven by CSS custom properties; `body.dark-mode` flips
-   the palette to dark mode.
-   ================================================================== */
-
-/* ---------- 1. Design tokens (Light mode = default) ---------- */
 :root {
-  /* Surfaces & text */
   --bg:            #f4f6fb;
   --card-bg:       #ffffff;
   --text:          #1e2235;
   --text-muted:    #6b7280;
-
-  /* Accents & controls */
   --accent:        #6366f1;
   --accent-hover:  #4f46e5;
   --accent-soft:   #eef2ff;
   --border:        #e6e8ef;
   --danger:        #ef4444;
 
-  /* Effects */
   --shadow:        0 4px 20px rgba(17, 24, 39, 0.06);
   --shadow-lg:     0 10px 30px rgba(17, 24, 39, 0.10);
   --radius:        16px;
   --radius-sm:     10px;
-
-  /* Layout */
   --max-width:     960px;
   --gap:           1.5rem;
-
-  /* Typography */
   --font: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-
-  /* Smooth theme transition */
   --transition: background-color 0.3s ease, color 0.3s ease,
                 border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ---------- 2. Dark mode tokens ---------- */
-/* Challenge 1: toggling this class on <body> flips the whole UI. */
 body.dark-mode {
   --bg:            #0f172a;
   --card-bg:       #1e293b;
@@ -56,7 +36,6 @@ body.dark-mode {
   --shadow-lg:     0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
-/* ---------- 3. Reset & base ---------- */
 *,
 *::before,
 *::after {
@@ -83,7 +62,6 @@ body {
   flex-direction: column;
 }
 
-/* Accessibility: visually hide labels that still work for screen readers */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -96,7 +74,6 @@ body {
   border: 0;
 }
 
-/* ---------- 4. Header ---------- */
 .site-header {
   width: 100%;
   background-color: var(--card-bg);
@@ -122,7 +99,6 @@ body {
   color: var(--text);
 }
 
-/* ---------- 5. Light / Dark toggle ---------- */
 .theme-toggle {
   display: inline-flex;
   align-items: center;
@@ -154,7 +130,6 @@ body.dark-mode .theme-toggle {
   background-color: var(--accent-soft);
 }
 
-/* ---------- 6. Dashboard layout ---------- */
 .dashboard {
   width: 100%;
   max-width: var(--max-width);
@@ -166,7 +141,6 @@ body.dark-mode .theme-toggle {
   flex: 1;
 }
 
-/* ---------- 7. Cards ---------- */
 .card {
   background-color: var(--card-bg);
   border: 1px solid var(--border);
@@ -183,7 +157,6 @@ body.dark-mode .theme-toggle {
   color: var(--text);
 }
 
-/* ---------- 8. Greeting ---------- */
 .greeting {
   text-align: center;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
@@ -209,7 +182,6 @@ body.dark-mode .theme-toggle {
   opacity: 0.9;
 }
 
-/* ---------- 9. Focus Timer ---------- */
 .timer-display {
   font-size: 3.5rem;
   font-weight: 800;
@@ -235,7 +207,6 @@ body.dark-mode .theme-toggle {
   min-height: 1.25rem;
 }
 
-/* ---------- 10. Buttons ---------- */
 .btn {
   font-family: inherit;
   font-size: 0.95rem;
@@ -280,7 +251,6 @@ body.dark-mode .theme-toggle {
   cursor: not-allowed;
 }
 
-/* ---------- 11. To-Do List ---------- */
 .todo-form {
   display: flex;
   gap: 0.6rem;
@@ -316,7 +286,6 @@ body.dark-mode .theme-toggle {
   gap: 0.5rem;
 }
 
-/* Single task row (injected by JS) */
 .todo-item {
   display: flex;
   align-items: center;
@@ -379,7 +348,6 @@ body.dark-mode .theme-toggle {
   outline-offset: 2px;
 }
 
-/* Empty state message */
 .todo-empty {
   text-align: center;
   color: var(--text-muted);
@@ -387,7 +355,6 @@ body.dark-mode .theme-toggle {
   padding: 1rem 0;
 }
 
-/* ---------- 12. Quick Links ---------- */
 .links-list {
   list-style: none;
   display: grid;
@@ -457,7 +424,6 @@ body.dark-mode .theme-toggle {
   flex: 0 0 auto;
 }
 
-/* Each link row: the link button + its delete control */
 .link-item {
   display: flex;
   align-items: center;
@@ -516,7 +482,6 @@ body.dark-mode .theme-toggle {
   opacity: 1;
 }
 
-/* ---------- 13. Footer ---------- */
 .site-footer {
   text-align: center;
   padding: 1.5rem 1.25rem;
@@ -524,13 +489,11 @@ body.dark-mode .theme-toggle {
   color: var(--text-muted);
 }
 
-/* ---------- 14. Responsive ---------- */
 @media (min-width: 900px) {
   .dashboard {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Greeting + Quick Links span the full row */
   .greeting,
   .quick-links {
     grid-column: 1 / -1;
@@ -555,7 +518,6 @@ body.dark-mode .theme-toggle {
   }
 }
 
-/* ---------- 15. Motion preference ---------- */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
