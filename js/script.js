@@ -1,6 +1,5 @@
 (function () {
   "use strict";
-
   document.addEventListener("DOMContentLoaded", function () {
     initGreeting();
     initFocusTimer();
@@ -17,7 +16,6 @@
 
     var STORAGE_KEY = "dashboard.userName";
     var DEFAULT_NAME = "Friend";
-
     greetingHeading.innerHTML =
       '<span id="greeting-word">Hello</span>, <span id="user-name" ' +
       'class="user-name" contenteditable="true" spellcheck="false" ' +
@@ -32,10 +30,8 @@
     if (savedName) {
       nameEl.textContent = savedName;
     }
-
     updateClock();
     setInterval(updateClock, 1000);
-
     function updateClock() {
       var now = new Date();
       timeEl.textContent = formatTime(now);
@@ -406,7 +402,6 @@
       document.head.appendChild(style);
     }
   }
-
   function initQuickLinks() {
     var form = document.getElementById("link-form");
     var nameInput = document.getElementById("link-name");
@@ -493,7 +488,6 @@
 
       emptyEl.hidden = links.length > 0;
     }
-
     function saveLinks() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(links));
@@ -518,7 +512,6 @@
         return [];
       }
     }
-
     function defaultLinks() {
       return [
         { id: makeLinkId(), name: "Google", url: "https://www.google.com" },
